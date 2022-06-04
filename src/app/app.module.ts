@@ -32,12 +32,15 @@ export const ROUTES: Routes = [];
 export class AppModule {}
 
 /*
-var config = {
-  apiKey: "AIzaSyCXz7GrHLBs-xlsCrr185iG4v4UrNreq2Y",
-  authDomain: "fitness-app-e668a.firebaseapp.com",
-  databaseURL: "https://fitness-app-e668a.firebaseio.com",
-  projectId: "fitness-app-e668a",
-  storageBucket: "fitness-app-e668a.appspot.com",
-  messagingSenderId: "1014564696462"
+const firebaseConfig = {
+  apiKey: "AIzaSyC86P7KSmQNQXEbLs0q8qBUAVdk0KztOcU",
+  authDomain: "ending-app-1833a.firebaseapp.com",
+  databaseURL: "https://ending-app-1833a-default-rtdb.firebaseio.com",
+  projectId: "ending-app-1833a",
+  storageBucket: "ending-app-1833a.appspot.com",
+  messagingSenderId: "232822833797",
+  appId: "1:232822833797:web:f470ba2d524af2cf47dfec",
+  measurementId: "G-3WF1EN50W4"
+};
 };
 */

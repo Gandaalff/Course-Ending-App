@@ -4,15 +4,15 @@
     <ng-content select="h1"></ng-content>
        <label>
            <input
-           type="email"
-           placeholder="Email adress"
-           formControlName="email">
+             type="email"
+             placeholder="Email adress"
+             formControlName="email">
        </label>
-       <label>
-        <input
-        type="password"
-        placeholder="Email password"
-        formControlName="password">
+        <label>
+            <input
+             type="password"
+             placeholder="Email password"
+             formControlName="password">
     </label>
 
     <div class="error" *ngIf="emailFormat">
@@ -23,7 +23,7 @@
         Invalid password format
     </div>
 
-    <ng-content select="error"></ng-content>
+    <ng-content select=".error"></ng-content>
 
     <div class="auth-form__action">
         <ng-content select="button"></ng-content>

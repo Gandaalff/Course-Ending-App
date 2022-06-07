@@ -3,6 +3,12 @@ import { CommonModule, registerLocaleData } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
+
+
 
 export const ROUTES: Routes = [{
     path: 'auth',
@@ -29,22 +35,12 @@ export const ROUTES: Routes = [{
         CommonModule,
         RouterModule.forChild(ROUTES),
         LoginModule,
-        RegisterModule
-    ],
+        RegisterModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFirestoreModule,
+        AngularFirestoreModule ,
+        SharedModule.forRoot()
+    ]
 })
 export class AuthModule {}
 
-
-
-
-// {
-//     path: 'auth',
-//     children:[
-//         {path: '', pathMatch: 'full', redirectTo: 'login' },
-//         {path: 'login',
-//         loadChildren: () => import('./login/login.module').then(x => x.LoginModule)
-//     },
-//         {path: 'refister',
-//         loadChildren: './register/register.module#LoginModule'},
-//     ]
-// }

@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ending-app-1833a"
+  },
+  "targets": {
+    "ending-app-1833a": {
+      "hosting": {
+        "Course-Ending-App": [
+          "ending-app-1833a"
+        ]
+      }
+    }
   }
 }

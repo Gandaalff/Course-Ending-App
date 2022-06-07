@@ -10,14 +10,15 @@ import { Store } from 'store';
 import { AppComponent } from './containers/app/app.component';
 
 // components
-
+import { AuthModule } from 'src/auth/auth.module';
 // routes
 export const ROUTES: Routes = [];
 
 @NgModule({
   imports: [
     BrowserModule,
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forRoot(ROUTES),
+    AuthModule
   ],
   declarations: [
     AppComponent

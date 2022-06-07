@@ -8,7 +8,7 @@ export const ROUTES: Routes = [{
     path: 'auth',
     children:[
         {
-        path: '', pathMatch: 'full', redirectTo: 'login' 
+        path: '', pathMatch: 'full', redirectTo: '' 
         },
         
         {

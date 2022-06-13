@@ -1,4 +1,14 @@
 <div>
+    <!-- <app-header>
+        [user]="user"
+    </app-header>
+    <app-nav>
+
+    </app-nav> -->
+    
+    <h1>
+        {{user$ | async | json}}
+    </h1>
     Hello
     <div class="wrapper">
         <router-outlet></router-outlet>

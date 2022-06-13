@@ -12,7 +12,8 @@ export class AuthFormComponent implements OnInit {
     
 
     form! : FormGroup
-
+    @Output()
+    submitted = new EventEmitter<FormGroup>()
     ngOnInit(){
         this.form = this.fb.group({
             email: ['',Validators.email],
@@ -20,8 +21,7 @@ export class AuthFormComponent implements OnInit {
     })}
 
 
-    @Output()
-    submitted = new EventEmitter<FormGroup>();
+
 
     constructor(
         private fb: FormBuilder

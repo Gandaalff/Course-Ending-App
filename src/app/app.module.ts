@@ -22,8 +22,18 @@ import { provideMessaging,getMessaging } from '@angular/fire/messaging';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+
+// import { AppHeaderComponent } from './components/app-header/app-header.component';
+// import { AppNavComponent } from './components/app-nav/app-nav.component';
 // routes
-export const ROUTES: Routes = [];
+
+export const ROUTES: Routes = [
+  {
+    path: 'auth',
+    loadChildren: () => import ('../auth/auth.module').then(mod => mod.AuthModule)
+    },
+   
+];
 
 @NgModule({
   imports: [
@@ -39,10 +49,13 @@ export const ROUTES: Routes = [];
     provideMessaging(() => getMessaging()),
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    
   ],
   declarations: [
-    AppComponent
+    AppComponent,
+    // AppNavComponent,
+    // AppHeaderComponent
   ],
   providers: [
     Store,
@@ -54,16 +67,3 @@ export const ROUTES: Routes = [];
 })
 export class AppModule {}
 
-/*
-const firebaseConfig = {
-  apiKey: "AIzaSyC86P7KSmQNQXEbLs0q8qBUAVdk0KztOcU",
-  authDomain: "ending-app-1833a.firebaseapp.com",
-  databaseURL: "https://ending-app-1833a-default-rtdb.firebaseio.com",
-  projectId: "ending-app-1833a",
-  storageBucket: "ending-app-1833a.appspot.com",
-  messagingSenderId: "232822833797",
-  appId: "1:232822833797:web:f470ba2d524af2cf47dfec",
-  measurementId: "G-3WF1EN50W4"
-};
-};
-*/

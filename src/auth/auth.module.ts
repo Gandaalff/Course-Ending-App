@@ -13,12 +13,12 @@ import { SharedModule } from './shared/shared.module';
 export const ROUTES: Routes = [
 
     {
-        path: '', pathMatch: 'full', redirectTo: 'register' 
+        path: '', pathMatch: 'full', redirectTo: 'whitescreen' 
         },
         
         {
         path: 'login',
-        loadChildren: () => import ('../auth/auth.module').then(mod => mod.AuthModule)
+        loadChildren: () => import ('./login/login.module').then(mod => mod.LoginModule)
         },
 
         {

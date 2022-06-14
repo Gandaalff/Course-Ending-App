@@ -1,15 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
-
 import { Store } from 'store';
-
-// feature modules
-
-// containers
 import { AppComponent } from './containers/app/app.component';
-
-// components
 import { AuthModule } from '../auth/auth.module';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -24,16 +17,16 @@ import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { AppHeaderComponent } from './components/app-header/app-header.component';
 import { AppNavComponent } from './components/app-nav/app-nav.component';
+import { HealthModule } from 'src/health/health.module';
 
-// import { AppHeaderComponent } from './components/app-header/app-header.component';
-// import { AppNavComponent } from './components/app-nav/app-nav.component';
-// routes
+
 
 export const ROUTES: Routes = [
+ 
   {
     path: 'auth',
     loadChildren: () => import ('../auth/auth.module').then(mod => mod.AuthModule)
-    },
+  },
    
 ];
 
@@ -42,6 +35,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     RouterModule.forRoot(ROUTES),
     AuthModule,
+    HealthModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -67,5 +61,6 @@ export const ROUTES: Routes = [
     AppComponent
   ]
 })
+
 export class AppModule {}
 

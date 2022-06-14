@@ -1,4 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import { Observable, Subscription } from 'rxjs';
 import { AuthService } from 'src/auth/shared/services/auth/auth.service';
@@ -16,6 +17,7 @@ export class AppComponent  {
 
   constructor(
     private store: Store,
+    private router: Router,
     private authService: AuthService
   ) {}
 
@@ -30,9 +32,9 @@ console.log("xxxx",this.subscription)
     this.subscription.unsubscribe();
   }
 
-  // async onLogout() {
-  //   await this.authService.logoutUser();
-  //   this.router.navigate(['/auth/login']);
-  // }
+  async onLogout() {
+    await this.authService.logoutUser();
+    this.router.navigate(['/auth/login']);
+  }
 
 }

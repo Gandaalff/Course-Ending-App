@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from 
 import { User } from 'src/auth/shared/services/auth/auth.service';
 
 @Component({
-    selector: 'app-headre',
+    selector: 'app-header',
     changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['app-header.component.scss'],
     templateUrl: 'app-header.component.html'
@@ -10,7 +10,7 @@ import { User } from 'src/auth/shared/services/auth/auth.service';
 export class AppHeaderComponent {
 
     @Input()
-    user: User
+    user: User;
 
 
     @Output()
@@ -20,7 +20,4 @@ export class AppHeaderComponent {
     logoutUser(){
         this.logout.emit();
     }
-
-
-    constructor() {}
 }

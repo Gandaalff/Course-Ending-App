@@ -23,7 +23,6 @@ export class AppComponent  {
 
   ngOnInit() {
     
-console.log("xxxx",this.subscription)
     this.subscription = this.authService.auth$.subscribe();
     this.user$ = this.store.select<User>('user');
   }

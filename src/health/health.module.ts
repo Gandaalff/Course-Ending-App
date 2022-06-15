@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/auth/shared/auth.guard.ts/auth.guard';
-
+import { SharedModule } from './shared/shared.module';
 export const ROUTES : Routes =[
 {
     path: 'schedule',
@@ -23,7 +23,8 @@ export const ROUTES : Routes =[
 
 @NgModule({
     imports: [
-        RouterModule.forChild(ROUTES)
+        RouterModule.forChild(ROUTES),
+        SharedModule.forRoot()
     ],
     declarations: [],
     providers: []

@@ -4,6 +4,8 @@ import { tap} from "rxjs";
 import { Store } from 'store';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
+import { getAuth } from 'firebase/auth';
+
 
 
 
@@ -15,11 +17,12 @@ export interface User {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  auth: any;
+  
+  
   auth$ : any = []
+    
 
   constructor(
-    private fireAuth: AngularFireAuth,
     private store: Store,
     private af: AngularFireAuth,
   
@@ -40,19 +43,21 @@ export class AuthService {
   }    
   
   createUser(email: string, password: string) {
-    return this.af.createUserWithEmailAndPassword(email, password).then((userCredential) => {
-    const user = userCredential.user;
-  })
+    return this.af
+      .createUserWithEmailAndPassword(email, password);
   }
-      
+
   loginUser(email: string, password: string) {
-    return this.af.signInWithEmailAndPassword(email, password).then((userCredential) => {
-    const user = userCredential.user;
-  })
+    return this.af
+      .signInWithEmailAndPassword(email, password);
   }
 
   logoutUser() {
     return this.af.signOut();
+  }
+
+  get user(){
+    return this.af.currentUser
   }
 
   get authState() {

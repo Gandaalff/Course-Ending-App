@@ -22,7 +22,12 @@ import { HealthModule } from 'src/health/health.module';
 
 
 export const ROUTES: Routes = [
- 
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'schedule'
+
+  },
   {
     path: 'auth',
     loadChildren: () => import ('../auth/auth.module').then(mod => mod.AuthModule)

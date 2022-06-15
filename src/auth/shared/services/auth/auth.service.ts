@@ -17,15 +17,15 @@ export interface User {
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
-  
-  
+
+
   auth$ : any = []
-    
+
 
   constructor(
     private store: Store,
     private af: AngularFireAuth,
-  
+
   ){
     this.auth$ = this.af.authState.pipe(tap(next =>{
         if(!next) {
@@ -40,8 +40,8 @@ export class AuthService {
         this.store.set('user', user)
     }))
     console.log("xxx",this.auth$)
-  }    
-  
+  }
+
   createUser(email: string, password: string) {
     return this.af
       .createUserWithEmailAndPassword(email, password);
@@ -56,7 +56,7 @@ export class AuthService {
     return this.af.signOut();
   }
 
-  get user(){
+  async user(){
     return this.af.currentUser
   }
 
@@ -64,5 +64,4 @@ export class AuthService {
     return this.af.authState
   }
 
-}  
-  
+}

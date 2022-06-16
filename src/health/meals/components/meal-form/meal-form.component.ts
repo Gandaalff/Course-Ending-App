@@ -1,42 +1,58 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, Input, Output } from '@angular/core';
 import { Form, FormArray, FormGroup, FormBuilder, FormControl, Validators,  } from '@angular/forms';
+import { Meal } from 'src/health/shared/services/meals/meals.service';
+import { EventEmitter } from 'stream';
+
+
 @Component({
     selector: 'meal-form',
-    changeDetection: ChangeDetectionStrategy.OnPush,
     styleUrls: ['meal-form.component.scss'],
-    templateUrl: 'meal-form.component.html'
+    templateUrl: 'meal-form.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
+
 export class MealFormComponent implements OnInit {
+    
+
+    @Output()
+    create: EventEmitter = new EventEmitter();
+
     form!: FormGroup
-    
-   
-    constructor(
-        private fb: FormBuilder
-    ) {}
-    
 
-    ngOnInit(): void {
-        this.form= this.fb.group({
-            name: ['', Validators.required],
-            ingrediens: this.fb.array([''])
-        })
-
-        
-    }
-    
     get ingredients(){
         return this.form.get('ingredients') as FormArray
     }
 
+    get required() {
+        return (
+            this.form.get('name').hasError('required') &&
+            this.form.get('name').touched
+        )
+    }
+
+    constructor(
+        private fb: FormBuilder
+    ) {}
+
+    ngOnInit(): void {
+        this.form= this.fb.group({
+            name: ['', Validators.required],
+            ingredients: this.fb.array([''])
+        })
+    }
+    
     addIngredient(){
-        this.ingredients.push(new FormControl('xyz'))
+        this.ingredients.push(new FormControl(''))
     }
 
     createMeal(){
-        console.log(this.form.value)
+        if(this.form.valid) {
+            this.create.emit(this.form.value)
+        }
     }
 
     removeIngredient(index: number) {
         this.ingredients.removeAt(index)
     }
+
 }

@@ -22,14 +22,13 @@ export class MealsService {
         private store: Store,
         private db: AngularFireDatabase,
         private authService: AuthService
-    ) {
-        this.meals$ = this.db.list(`meals/${this.uid}`).valueChanges().pipe(tap((next: any) => this.store.set('meals',next)))
-    }
+    ) {}
 
 
-    async uid() {
-        const user = await this.authService.user;
-        return user.uid;
-        
-       }
+    getMealsForUser(uuidUser: string): any {
+        return this.db.list(`meals/${uuidUser}`).valueChanges().pipe(
+                tap((next: any) => {
+                  this.store.set('meals',next);
+                }))
+      }
 }

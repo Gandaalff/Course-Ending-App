@@ -11,10 +11,6 @@ import { SharedModule } from './shared/shared.module';
 
 
 export const ROUTES: Routes = [
-
-    {
-        path: '', pathMatch: 'full', redirectTo: 'whitescreen' 
-        },
         
         {
         path: 'login',

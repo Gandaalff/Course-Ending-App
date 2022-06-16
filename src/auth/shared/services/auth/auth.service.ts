@@ -56,7 +56,7 @@ export class AuthService {
     return this.af.signOut();
   }
 
-  get user(){
+  async user(){
     return this.af.currentUser
   }
 

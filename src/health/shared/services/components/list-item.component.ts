@@ -25,7 +25,7 @@ export class ListItemComponent {
     constructor() {
         // this.itemsRef = db.list('messages');
     // Use snapshotChanges().map() to store the key
-    
+
     }
 
     toggle() {
@@ -38,15 +38,15 @@ export class ListItemComponent {
 
     // getKey(){
     //     this.items = this.itemsRef.snapshotChanges().pipe(
-    //         map(changes => 
+    //         map(changes =>
     //           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
     //         )
-          
+
     //       );
     // }
 
     getRoute(item: any) {
         return [`../meals`,item.$key];  //$KEY ZWRACA UNDEFINED
     }
-    
+
 }

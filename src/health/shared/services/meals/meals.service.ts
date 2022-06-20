@@ -19,7 +19,7 @@ export interface Meal{
 
 @Injectable()
 export class MealsService {
-    
+
     user: User;
     onAuthStateChanged: any;
     firebase: any;
@@ -32,9 +32,9 @@ export class MealsService {
     ) {}
 
     getMealsForUser(uuidUser: string): any {
-        return  this.db.list(`meals/${uuidUser}`).valueChanges().pipe(
-                tap((next: any) => {
-                  this.store.set('meals',next);
+        return  this.db.list(`meals/${uuidUser}`).snapshotChanges().pipe(
+                tap((mealsFromDatebase: any) => {
+                  this.store.set('meals',mealsFromDatebase.map((meal: any) => ({ $key: meal.key, ...meal.payload.val() })));
                 }))
       }
 
@@ -54,14 +54,13 @@ export class MealsService {
         removeMeal.remove($key)         // NIE DZIAŁA $KEY
     }
 
-    // getMeal(key:string){
-    //     if(!key) return of({});
-    //     return this.store.select<Meal[]>('meals')
-    //         .filter(Boolean)
-    //             .pipe(map((meals: any[]) => {
-    //                 meals.find((meal: Meal) => meal.$key === key )
-    //             }))
-    // }
+    getMeal(key:string){
+        if(!key) return of({});
+        return this.store.select<Meal[]>('meals')
+                .pipe(
+                  filter((meals: any) => {
+                    return meals?.find((meal: Meal) => meal.$key === key);
+                  })
+                )
+    }
 }
-
-

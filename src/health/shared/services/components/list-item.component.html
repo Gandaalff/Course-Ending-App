@@ -2,7 +2,7 @@
     <a [routerLink]="getRoute(item)">
         <p class="list-item__name">
             {{item.name}}
-        
+            {{ item | json}}
         </p>
         <p>{{item.$key}}</p>
         <p class="list-item__ingredients">

@@ -1,9 +1,12 @@
 <div class="meal">
     <div class="meal__title">
         <h1>
+          <ng-container *ngIf="(meal$ | async) as meal">
+            {{meal[0] | json}}
+          </ng-container>
             <img src="/assets/img/food.svg">
             <span *ngIf="meal$ | async as meal; else title">
-                {{meal.name ? "Edit" : "Create" }}
+                {{meal[0]?.name ? "Edit" : "Create" }}
             </span>
             <ng-template #title>
                 Loading...
@@ -16,5 +19,5 @@
 
         </meal-form>
     </div>
-   
+
 </div>

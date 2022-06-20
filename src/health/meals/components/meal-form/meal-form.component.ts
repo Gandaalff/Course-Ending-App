@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, OnInit, Input, Output } from '@angular/core';
-import { Form, FormArray, FormGroup, FormBuilder, FormControl, Validators,  } from '@angular/forms';
+import { Component, ChangeDetectionStrategy, OnInit, Output,EventEmitter } from '@angular/core';
+import { FormArray, FormGroup, FormBuilder, FormControl, Validators,  } from '@angular/forms';
+import { stringify } from 'querystring';
 import { Meal } from 'src/health/shared/services/meals/meals.service';
-import { EventEmitter } from 'stream';
+
 
 
 @Component({
@@ -15,7 +16,7 @@ export class MealFormComponent implements OnInit {
     
 
     @Output()
-    create: EventEmitter = new EventEmitter();
+    create: EventEmitter<Meal> = new EventEmitter();
 
     form!: FormGroup
 
@@ -37,7 +38,8 @@ export class MealFormComponent implements OnInit {
     ngOnInit(): void {
         this.form= this.fb.group({
             name: ['', Validators.required],
-            ingredients: this.fb.array([''])
+            ingredients: this.fb.array(['']),
+           
         })
     }
     

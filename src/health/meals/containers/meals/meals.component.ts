@@ -25,12 +25,21 @@ async ngOnInit(){
     this.meals$ = this.store.select<Meal[]>('meals');
 
     const user = await this.authService.user();
+    
     this.subscription.add(
         this.mealsService.getMealsForUser(user.uid).subscribe()
     );
+
+    
 }
 
 ngOnDestroy(){
     this.subscription.unsubscribe()
+}
+
+removeMeal(event: any) {
+    this.mealsService.removeMeal(event.$key)
+    console.log('remove:', event)
+
 }
 }

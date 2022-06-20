@@ -4,10 +4,6 @@ import { tap} from "rxjs";
 import { Store } from 'store';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-import { getAuth } from 'firebase/auth';
-
-
-
 
 export interface User {
     email: string,
@@ -18,10 +14,8 @@ export interface User {
 @Injectable({providedIn: 'root'})
 export class AuthService {
   
-  
   auth$ : any = []
     
-
   constructor(
     private store: Store,
     private af: AngularFireAuth,

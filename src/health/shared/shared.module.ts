@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database'
 import{MealsService} from './services/meals/meals.service'
-
+import { ListItemComponent } from './services/components/list-item.component';
 @NgModule({
     imports: [
         AngularFireDatabaseModule,
@@ -11,7 +11,12 @@ import{MealsService} from './services/meals/meals.service'
         CommonModule
 
     ],
-    declarations: [],
+    declarations: [
+        ListItemComponent
+    ],
+    exports: [
+        ListItemComponent
+    ]
    
 })
 export class SharedModule {

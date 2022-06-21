@@ -69,6 +69,7 @@ export class WorkoutFormComponent implements OnChanges, OnInit {
     ngOnInit(): void {
         this.form= this.fb.group({
             name: ['', Validators.required],
+            type: 'strength'
         })
     }
 

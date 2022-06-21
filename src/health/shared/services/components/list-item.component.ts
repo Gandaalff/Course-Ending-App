@@ -36,14 +36,6 @@ export class ListItemComponent {
         this.remove.emit(this.item)
     }
 
-    // getKey(){
-    //     this.items = this.itemsRef.snapshotChanges().pipe(
-    //         map(changes => 
-    //           changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-    //         )
-          
-    //       );
-    // }
 
     getRoute(item: any) {
         return [`../meals`,item.$key];  //$KEY ZWRACA UNDEFINED

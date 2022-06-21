@@ -14,7 +14,7 @@ import { switchMap } from 'rxjs/operators';
 
 export class MealComponent implements OnInit, OnDestroy {
 
-    meal$: Observable<any>;             //Zamiast Any ma być Meal
+    meal$: Observable<Meal>;             //Zamiast Any ma być Meal
     subscription: Subscription
 
 
@@ -26,11 +26,11 @@ export class MealComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(){
-    // this.subscription = this.mealsService.meals$.subscribe();
-    // this.meal$ = this.route.params
-    //     .pipe(switchMap((param) => {
-    //         return this.mealsService.getMeal(param.id)
-    //     }))
+    this.meal$ = this.route.params
+        .pipe(switchMap((param) => {
+            console.log('param.id', param.id);
+            return this.mealsService.getMeal(param.id)
+        }))
     }
 
     ngOnDestroy(): void {
@@ -45,4 +45,24 @@ export class MealComponent implements OnInit, OnDestroy {
     backToMeals(){
         this.Router.navigate(['meals']);
     }
+
+    async updateMeal(event: Meal){
+        const key = this.route.snapshot.params.id;
+        await this.mealsService.updateMeal(key, event);
+        this.backToMeals
+    }
+
+    async removeMeal(event: Meal){
+        const key = this.route.snapshot.params.id;
+        await this.mealsService.deleteMeal(key);
+        this.backToMeals
+    }
+
+
+
+
+
+
 }
+
+

@@ -16,7 +16,7 @@ export const ROUTES : Routes =[
 {
     path: 'workout',
     canActivate:[AuthGuard],
-    loadChildren: () => import ('./workout/workout.module').then(mod => mod.WorkoutModule)
+    loadChildren: () => import ('./workout/workout.module').then(mod => mod.WorkoutsModule)
 },
 ]
 
@@ -26,7 +26,5 @@ export const ROUTES : Routes =[
         RouterModule.forChild(ROUTES),
         SharedModule.forRoot()
     ],
-    declarations: [],
-    providers: []
 })
 export class HealthModule {}

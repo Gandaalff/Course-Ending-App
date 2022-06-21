@@ -7,9 +7,10 @@ import { AuthService, User } from 'src/auth/shared/services/auth/auth.service';
 import { Store } from 'store';
 import { of } from 'rxjs'
 import { filter, map } from 'rxjs/operators';
-import {zip} from "rxjs"
+
 
 export interface Meal{
+   
     name:string,
     ingredients: string[];
     timestamp: number,
@@ -31,12 +32,28 @@ export class MealsService {
         public afAuth: AngularFireAuth
     ) {}
 
-    getMealsForUser(uuidUser: string): any {
-        return  this.db.list(`meals/${uuidUser}`).valueChanges().pipe(
+    getMealsForUser(uuidUser: string): Observable<Meal> {
+        return  this.db.list(`meals/${uuidUser}`).snapshotChanges().pipe(
                 tap((next: any) => {
-                  this.store.set('meals',next);
-                }))
-      }
+                    this.store.set('meals',next.map((meal:any) => ({ $key: meal.payload.key, ...meal.payload.val() as Meal })))
+                })
+                
+        )
+        
+    }
+    // getMealsForUser(uuidUser: string): Observable<Meal[]> {
+    //     return this.db.list(`meals/${uuidUser}`).snapshotChanges()
+    //     .pipe(map(next => {
+    //      return next.map(meal => {
+    //       const data = meal.payload.val() as Meal;
+    //       const $key = meal.key;
+    //       return { $key, ...data };
+    //      });
+    //     }));
+    //    }
+
+
+
 
     async addMeal(meal: Meal){
         const user = await this.authService.user();
@@ -50,18 +67,28 @@ export class MealsService {
     async removeMeal($key:string) {
         const user = this.authService.user();
         const removeMeal = this.db.list(`meals/${(await user).uid}`)
-        console.log('to jest key', $key)
-        removeMeal.remove($key)         // NIE DZIAŁA $KEY
+        removeMeal.remove($key)         
     }
 
-    // getMeal(key:string){
-    //     if(!key) return of({});
-    //     return this.store.select<Meal[]>('meals')
-    //         .filter(Boolean)
-    //             .pipe(map((meals: any[]) => {
-    //                 meals.find((meal: Meal) => meal.$key === key )
-    //             }))
-    // }
+    getMeal(key:string){
+        if(!key) return of('pusta');
+        return this.store.select<Meal[]>('meals')
+                .pipe(
+                  filter((meals: any) => {
+                    return meals?.find((meal: Meal) => meal.$key === key);
+                  })
+                )
+    }
+
+    updateMeal(key: string, meal:Meal) {
+        
+        return this.db.object(`meals/${this.user.uid}/${key}`).update(meal)
+    }
+
+    deleteMeal(key: string) {
+        return this.db.list(`meals/${this.user.uid}`).remove(key)
+    }
+    
 }
 
 

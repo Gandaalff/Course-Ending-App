@@ -35,7 +35,7 @@ export class WorkoutComponent implements OnInit {
     }
 
     backToWorkout(){
-        this.Router.navigate(['workouts']);
+        this.Router.navigate(['workout']);
     }
 
     async updateMeal(event: Workout){

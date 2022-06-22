@@ -12,8 +12,8 @@ import { Meal } from '../meals/meals.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ListItemComponent {
-    itemsRef: AngularFireList<any>;
-    items: Observable<any[]>;
+    itemsRef: AngularFireList<Meal>;
+    items: Observable<Meal[]>;
     toggled = false;
 
     @Input()
@@ -38,7 +38,7 @@ export class ListItemComponent {
 
 
     getRoute(item: any) {
-        return [`../meals`,item.$key];  //$KEY ZWRACA UNDEFINED
+        return [`../${item.ingredients ? 'meals' : 'workout'}`,item.$key];  //$KEY ZWRACA UNDEFINED
     }
     
 }

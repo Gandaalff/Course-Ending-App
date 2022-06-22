@@ -37,7 +37,7 @@ ngOnDestroy(){
     this.subscription.unsubscribe()
 }
 
-removeMeal(event: any) {
+removeWorkout(event: any) {
     this.workoutService.removeWorkout(event.$key)
     console.log('remove:', event)
 

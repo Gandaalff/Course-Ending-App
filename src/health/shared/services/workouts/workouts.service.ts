@@ -47,21 +47,21 @@ export class WorkoutService {
     async addWorkout(workout: Workout){
         const user = await this.authService.user();
         console.log('aktaulny użytkownik',user)
-        const newWorkout= this.db.list(`workout/${user.uid}`);
+        const newWorkout= this.db.list(`workouts/${user.uid}`);
         newWorkout.push(workout)
-        console.log("nowy posiłek",workout)
+        console.log("nowy workout ",workout)
 
     }
 
     async removeWorkout($key:string) {
         const user = this.authService.user();
-        const removeMeal = this.db.list(`workout/${(await user).uid}`)
+        const removeMeal = this.db.list(`workouts/${(await user).uid}`)
         removeMeal.remove($key)         
     }
 
     getWorkout(key:string){
         if(!key) return of({});
-        return this.store.select<Workout[]>('workout')
+        return this.store.select<Workout[]>('workouts')
                 .pipe(
                   filter((workout: any) => {
                     return workout?.find((workout: Workout) => workout.$key === key);

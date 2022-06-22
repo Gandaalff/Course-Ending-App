@@ -3,14 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Meal, MealsService } from 'src/health/shared/services/meals/meals.service';
 import { switchMap } from 'rxjs/operators';
+
+
 @Component({
     selector: 'meal',
     styleUrls: ['meal.component.scss'],
     templateUrl: 'meal.component.html'
 })
-
-
-
 
 export class MealComponent implements OnInit, OnDestroy {
 

@@ -30,10 +30,6 @@ export class WorkoutFormComponent implements OnChanges, OnInit {
 
     form!: FormGroup
 
-    // get ingredients(){
-    //     return this.form.get('ingredients') as FormArray
-    // }
-
     get required() {
         return (
             this.form.get('name').hasError('required') &&
@@ -45,43 +41,35 @@ export class WorkoutFormComponent implements OnChanges, OnInit {
         private fb: FormBuilder
     ) {}
 
+    get placeholder() {
+        return `e.g ${this.form.get('type').value === 'strength' ? 'Benchpress' : 'Treadmill'}`
+    }
+
     ngOnChanges(changes: SimpleChanges){
-        // console.log("zzzz",this.meal.name)
-        //     console.log("zzzz",this.meal)
-        // if(this.meal && this.meal.$key ){
-        //     console.log("zzzz",this.meal.$key)
-        //     console.log("zzzz",this.meal)
-        //     this.exists = true
-        //     const value = this.meal;
-        //     console.log('value', value)
-        //     this.form.patchValue(value)
-
-        //     this.emptyIngredients();
-
-        //     if(value.ingredients) {
-        //         for(const item of value.ingredients) {
-        //             this.ingredients.push(new FormControl(item))
-        //         }
-        //     }
-        // }
+        
+        if(this.workout && this.workout.name ){
+            this.exists = true
+            const value = this.workout;
+            console.log('value', value)
+            this.form.patchValue(value)
+        }
     }
 
     ngOnInit(): void {
         this.form= this.fb.group({
             name: ['', Validators.required],
-            type: 'strength'
-        })
+            type: 'strength',
+            strength: this.fb.group({
+                reps: 0,
+                sets: 0,
+                weight: 0
+            }),
+            endurance: this.fb.group({
+                distance: 0,
+                duration: 0,
+            })
+        });
     }
-
-    // emptyIngredients() {
-    //     while(this.ingredients.controls.length){
-    //         this.ingredients.removeAt(0)
-    //     }
-    // }
-    
-    // addIngredient() {
-    //     this.ingredients.push(new FormControl(''))
-    // }
 
     createWorkout() {
         if(this.form.valid) {
@@ -98,10 +86,6 @@ export class WorkoutFormComponent implements OnChanges, OnInit {
     removeWorkout() {
         this.remove.emit(this.form.value)
     }
-
-    // removeIngredient(index: number) {
-    //     this.ingredients.removeAt(index)
-    // }
 
     toggle(){
         this.toggled = !this.toggled

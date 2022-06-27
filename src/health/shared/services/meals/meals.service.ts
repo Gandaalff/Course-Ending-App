@@ -20,7 +20,7 @@ export interface Meal{
 
 @Injectable()
 export class MealsService {
-    
+
     user: User;
     onAuthStateChanged: any;
     firebase: any;
@@ -32,28 +32,12 @@ export class MealsService {
         public afAuth: AngularFireAuth
     ) {}
 
-    getMealsForUser(uuidUser: string): Observable<Meal> {
+    getMealsForUser(uuidUser: string): any {
         return  this.db.list(`meals/${uuidUser}`).snapshotChanges().pipe(
-                tap((next: any) => {
-                    this.store.set('meals',next.map((meal:any) => ({ $key: meal.payload.key, ...meal.payload.val() as Meal })))
-                })
-                
-        )
-        
-    }
-    // getMealsForUser(uuidUser: string): Observable<Meal[]> {
-    //     return this.db.list(`meals/${uuidUser}`).snapshotChanges()
-    //     .pipe(map(next => {
-    //      return next.map(meal => {
-    //       const data = meal.payload.val() as Meal;
-    //       const $key = meal.key;
-    //       return { $key, ...data };
-    //      });
-    //     }));
-    //    }
-
-
-
+                tap((mealsFromDatebase: any) => {
+                  this.store.set('meals',mealsFromDatebase.map((meal: any) => ({ $key: meal.key, ...meal.payload.val() })));
+                }))
+      }
 
     async addMeal(meal: Meal){
         const user = await this.authService.user();
@@ -71,7 +55,7 @@ export class MealsService {
     }
 
     getMeal(key:string){
-        if(!key) return of('pusta');
+        if(!key) return of({});
         return this.store.select<Meal[]>('meals')
                 .pipe(
                   filter((meals: any) => {
@@ -90,5 +74,3 @@ export class MealsService {
     }
     
 }
-
-

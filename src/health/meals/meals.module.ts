@@ -9,15 +9,15 @@ import { MealFormComponent } from './components/meal-form/meal-form.component';
 
 export const ROUTES : Routes =[
     {
-        path: '', 
+        path: '',
         component: MealsComponent
     },
     {
-        path: 'new', 
+        path: 'new',
         component: MealComponent
     },
     {
-        path: ':id', 
+        path: ':id',
         component: MealComponent
     }
 ]
@@ -28,7 +28,7 @@ export const ROUTES : Routes =[
         ReactiveFormsModule,
         RouterModule.forChild(ROUTES),
         SharedModule
-        
+
     ],
     declarations: [
         MealsComponent,

@@ -25,6 +25,7 @@ export class MealComponent implements OnInit, OnDestroy {
 
 
     ngOnInit(){
+
     this.meal$ = this.route.params
         .pipe(switchMap((param) => {
             console.log('param.id', param.id);
@@ -44,7 +45,6 @@ export class MealComponent implements OnInit, OnDestroy {
     backToMeals(){
         this.Router.navigate(['meals']);
     }
-
     async updateMeal(event: Meal){
         const key = this.route.snapshot.params.id;
         await this.mealsService.updateMeal(key, event);
@@ -57,11 +57,7 @@ export class MealComponent implements OnInit, OnDestroy {
         this.backToMeals
     }
 
-
-
-
-
-
 }
+
 
 

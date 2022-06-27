@@ -21,8 +21,9 @@ export class ScheduleCalenderComponent implements OnChanges {
 
     @Input()
     set date(date: Date) {
-        this.selectedDay = new Date(date.getTime())
-    };
+    this.selectedDay = new Date(date.getTime());
+  }
+
 
     @Input()
     items: ScheduleList
@@ -41,6 +42,7 @@ export class ScheduleCalenderComponent implements OnChanges {
     }
 
     getSection(name : string) : ScheduleItem {
+        console.log('itemy', this.items)
         return this.items && this.items[name] || {};
     }
 

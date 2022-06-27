@@ -26,6 +26,7 @@ export class WorkoutService {
     user: User;
     onAuthStateChanged: any;
     firebase: any;
+    workouts$:Observable<Workout[]>
 
     constructor(
         private store: Store,
@@ -46,11 +47,8 @@ export class WorkoutService {
 
     async addWorkout(workout: Workout){
         const user = await this.authService.user();
-        console.log('aktaulny użytkownik',user)
         const newWorkout= this.db.list(`workouts/${user.uid}`);
         newWorkout.push(workout)
-        console.log("nowy workout ",workout)
-
     }
 
     async removeWorkout($key:string) {

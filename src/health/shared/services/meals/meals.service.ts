@@ -7,6 +7,7 @@ import { AuthService, User } from 'src/auth/shared/services/auth/auth.service';
 import { Store } from 'store';
 import { of } from 'rxjs'
 import { filter, map } from 'rxjs/operators';
+import { Workout } from '../workouts/workouts.service';
 
 
 export interface Meal{
@@ -24,6 +25,9 @@ export class MealsService {
     user: User;
     onAuthStateChanged: any;
     firebase: any;
+    meals$: Observable<Meal[]>
+    
+  
 
     constructor(
         private store: Store,
@@ -41,11 +45,8 @@ export class MealsService {
 
     async addMeal(meal: Meal){
         const user = await this.authService.user();
-        console.log('aktaulny użytkownik',user)
         const newMeal= this.db.list(`meals/${user.uid}`);
         newMeal.push(meal)
-        console.log("nowy posiłek",meal)
-
     }
 
     async removeMeal($key:string) {
